@@ -1,3 +1,4 @@
+import random
 import re
 
 REGEX_GROUPS = ['[0-9]+', '[a-zA-Z]+', '[0-9a-zA-Z]', '[0-9a-zA-Z._-]+', '/']
@@ -87,3 +88,13 @@ def get_regex(data, strings=True, depth=20):
     # Recurse on remainder
     return prefix + left_regex + optional_regex + get_regex(data, strings, depth-1) + right_regex + suffix
     
+def get_prefixes_random(data, select=3, rounds=25):
+    matches = set()
+    while len(matches) < rounds:
+        regex = get_regex(random.sample(data, select))
+        matches.add(regex)
+
+    candidates = filter(lambda x: x.endswith('\/'), set(map(lambda x: x[:x.find('[')], matches)))
+    prefixes = filter(lambda x: len(filter(lambda y: y.find(x) >= 0, candidates)) == 1, candidates)
+    
+    return map(lambda x: x.replace('\\', ''), prefixes)
