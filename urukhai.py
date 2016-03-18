@@ -1,7 +1,7 @@
 import random
 import re
 
-REGEX_GROUPS = ['[0-9]+', '[a-zA-Z]+', '[0-9a-zA-Z]', '[0-9a-zA-Z._-]+', '/']
+REGEX_GROUPS = ['[0-9]+', '[a-zA-Z]+', '[0-9a-zA-Z]+', '[0-9a-zA-Z._-]+', '/']
 
 def get_regex(data, strings=True, depth=20):
     
